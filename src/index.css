@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+
+  --color-primary: #1a3d2b;
+  --color-accent: #e8a320;
+  --color-background: #f9f5ef;
+  --color-surface: #ffffff;
+  --color-body: #1c1a18;
+  --color-muted: #8a857e;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-body font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-bold text-primary;
+  }
+}
+
+@utility card-radius {
+  border-radius: 14px;
+}
+
+.step-indicator {
+  @apply flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold text-sm;
+}
+
+.checklist-item {
+  @apply flex items-start gap-3 p-3 bg-surface border border-gray-100 card-radius transition-all;
+}
+
+.pro-tip {
+  @apply p-4 bg-accent/10 border-l-4 border-accent card-radius;
+}
