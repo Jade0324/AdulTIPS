@@ -13,7 +13,12 @@ export default function Layout({ children }: LayoutProps) {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Modules', path: '/#modules' },
+    { name: 'Foundation', path: '/foundation' },
+    { name: 'Finance', path: '/finance' },
+    { name: 'Property', path: '/property' },
+    { name: 'Health', path: '/health' },
+    { name: 'Living', path: '/living' },
+    { name: 'Growth', path: '/growth' },
     { name: 'Resources', path: '/resources' },
   ];
 
@@ -27,30 +32,24 @@ export default function Layout({ children }: LayoutProps) {
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden xl:flex items-center gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
                   className={cn(
-                    "text-sm font-medium transition-colors hover:text-accent",
+                    "text-xs font-bold uppercase tracking-wider transition-colors hover:text-accent",
                     location.pathname === link.path ? "text-primary" : "text-muted"
                   )}
                 >
                   {link.name}
                 </Link>
               ))}
-              <Link
-                to="/module-1"
-                className="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-primary/90 transition-all"
-              >
-                Start Learning
-              </Link>
             </div>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 text-primary"
+              className="xl:hidden p-2 text-primary"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -60,7 +59,7 @@ export default function Layout({ children }: LayoutProps) {
 
         {/* Mobile Nav */}
         {isMenuOpen && (
-          <div className="md:hidden bg-surface border-b border-gray-100 p-4 space-y-4">
+          <div className="xl:hidden bg-surface border-b border-gray-100 p-4 space-y-4 max-h-[80vh] overflow-y-auto">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -71,13 +70,6 @@ export default function Layout({ children }: LayoutProps) {
                 {link.name}
               </Link>
             ))}
-            <Link
-              to="/module-1"
-              className="block bg-primary text-white px-4 py-2 rounded-lg text-center font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Start Learning
-            </Link>
           </div>
         )}
       </nav>
@@ -95,19 +87,20 @@ export default function Layout({ children }: LayoutProps) {
               </p>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm text-white/70">
-                <li><Link to="/" className="hover:text-accent">Home</Link></li>
-                <li><Link to="/resources" className="hover:text-accent">Resources & Glossary</Link></li>
-                <li><Link to="/module-1" className="hover:text-accent">Government IDs</Link></li>
-                <li><Link to="/module-2" className="hover:text-accent">Financial Basics</Link></li>
+              <h4 className="font-bold mb-4 text-accent uppercase tracking-widest text-xs">Modules</h4>
+              <ul className="grid grid-cols-2 gap-2 text-sm text-white/70">
+                <li><Link to="/foundation" className="hover:text-accent">Foundation</Link></li>
+                <li><Link to="/finance" className="hover:text-accent">Finance</Link></li>
+                <li><Link to="/property" className="hover:text-accent">Property</Link></li>
+                <li><Link to="/health" className="hover:text-accent">Health</Link></li>
+                <li><Link to="/living" className="hover:text-accent">Living</Link></li>
+                <li><Link to="/growth" className="hover:text-accent">Growth</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Disclaimer</h4>
+              <h4 className="font-bold mb-4 text-accent uppercase tracking-widest text-xs">Disclaimer</h4>
               <p className="text-xs text-white/50 italic">
                 Not affiliated with any government agency. Information provided is for educational purposes only.
-                Always verify with official sources (SSS, BIR, DFA, etc.) for the latest updates.
               </p>
             </div>
           </div>
