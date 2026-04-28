@@ -10,7 +10,8 @@ import {
   TrendingUp,
   Target,
   CheckCircle2,
-  Zap
+  Zap,
+  ShieldAlert
 } from 'lucide-react';
 import ModuleCard from '@/components/ModuleCard';
 
@@ -52,11 +53,18 @@ export default function Home() {
       moduleNumber: "05"
     },
     {
+      title: "Protection",
+      description: "Identifying digital scams, GCash hacks, and illegal lending traps in the Philippines.",
+      icon: ShieldAlert,
+      path: "/protection",
+      moduleNumber: "06"
+    },
+    {
       title: "Growth",
       description: "Mindset and life optimization. 10-year vision, comfort zones, and building relationships.",
       icon: TrendingUp,
       path: "/growth",
-      moduleNumber: "06"
+      moduleNumber: "07"
     },
     {
       title: "Resources",
@@ -74,21 +82,21 @@ export default function Home() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-primary/5 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent font-bold text-[10px] uppercase tracking-[0.3em] mb-10">
-            Survival Guide for Filipinos
+            The First Adulting Operating System
           </div>
           <h1 className="text-6xl md:text-8xl font-serif font-bold text-primary mb-8 leading-tight">
-            Adulting made <br className="hidden md:block" /> <span className="text-accent italic">simple.</span>
+            Adulting with <br className="hidden md:block" /> <span className="text-accent italic">Confidence.</span>
           </h1>
           <p className="text-muted text-xl md:text-2xl max-w-2xl mx-auto mb-12 leading-relaxed">
-            Step-by-step life guide for Filipinos navigating government IDs, 
-            taxes, banking, and independent living.
+            A high-performance guide system for Filipinos navigating government IDs, 
+            finance, property, and mental expansion.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link
-              to="/foundation"
-              className="w-full sm:w-auto bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
+              to="/roadmap"
+              className="w-full sm:w-auto bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-xl shadow-primary/20"
             >
-              Start Your Journey
+              Get Your Personalized Roadmap
               <ArrowRight size={20} />
             </Link>
             <Link

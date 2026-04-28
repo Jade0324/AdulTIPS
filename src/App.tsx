@@ -8,6 +8,10 @@ import Property from '@/pages/Property';
 import Health from '@/pages/Health';
 import Living from '@/pages/Living';
 import Growth from '@/pages/Growth';
+import Protection from '@/pages/Protection';
+import Roadmap from '@/pages/Roadmap';
+import Dashboard from '@/pages/Dashboard';
+import Calculators from '@/pages/Calculators';
 import Resources from '@/pages/Resources';
 
 function ScrollToTop() {
@@ -40,6 +44,10 @@ export default function App() {
           <Route path="/health" element={<Health />} />
           <Route path="/living" element={<Living />} />
           <Route path="/growth" element={<Growth />} />
+          <Route path="/protection" element={<Protection />} />
+          <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/calculators" element={<Calculators />} />
           <Route path="/resources" element={<Resources />} />
         </Routes>
       </Layout>

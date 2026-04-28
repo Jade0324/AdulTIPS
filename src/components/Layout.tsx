@@ -13,12 +13,15 @@ export default function Layout({ children }: LayoutProps) {
 
   const navLinks = [
     { name: 'Home', path: '/' },
+    { name: 'Dashboard', path: '/dashboard' },
+    { name: 'Calculators', path: '/calculators' },
     { name: 'Foundation', path: '/foundation' },
     { name: 'Finance', path: '/finance' },
     { name: 'Property', path: '/property' },
     { name: 'Health', path: '/health' },
     { name: 'Living', path: '/living' },
     { name: 'Growth', path: '/growth' },
+    { name: 'Protection', path: '/protection' },
     { name: 'Resources', path: '/resources' },
   ];
 
@@ -92,6 +95,7 @@ export default function Layout({ children }: LayoutProps) {
                 <li><Link to="/foundation" className="hover:text-accent">Foundation</Link></li>
                 <li><Link to="/finance" className="hover:text-accent">Finance</Link></li>
                 <li><Link to="/property" className="hover:text-accent">Property</Link></li>
+                <li><Link to="/protection" className="hover:text-accent font-bold text-accent/80">Protection</Link></li>
                 <li><Link to="/health" className="hover:text-accent">Health</Link></li>
                 <li><Link to="/living" className="hover:text-accent">Living</Link></li>
                 <li><Link to="/growth" className="hover:text-accent">Growth</Link></li>

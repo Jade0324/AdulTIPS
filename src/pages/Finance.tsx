@@ -43,7 +43,17 @@ export default function Finance() {
       whyThisMatters: "It prevents you from going into debt when life happens.",
       requirements: ["Expense Tracker", "Savings Account", "Discipline"],
       proTip: "An emergency is not a 70% off sale at the mall.",
-      doThisToday: "Calculate your 3-month expense total."
+      doThisToday: "Calculate your 3-month expense total.",
+      ifThisHappens: [
+        {
+          title: "Lost my ATM card",
+          solution: "Immediately block the card via the bank app. Call the hotline to request a replacement and monitor for unauthorized charges."
+        },
+        {
+          title: "Need emergency money right now",
+          solution: "Access your EF. This is why you kept it in a digital bank—it's liquid and accessible 24/7. Do NOT use debt."
+        }
+      ]
     },
     {
       id: "credit",

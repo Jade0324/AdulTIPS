@@ -26,7 +26,17 @@ export default function Living() {
       whyThisMatters: "Unfair evictions can be a major financial burden.",
       requirements: ["Lease Contract", "Advance & Deposit", "Valid ID"],
       proTip: "Take photos and videos before you move in.",
-      doThisToday: "Read the Rent Control Act online."
+      doThisToday: "Read the Rent Control Act online.",
+      ifThisHappens: [
+        {
+          title: "Landlord refuses to return deposit",
+          solution: "Check the RA 9653 (Rent Control Act). Deposits are usually used for bills/damages, but remaining MUST be returned. Send a formal letter referencing your move-out inventory photos."
+        },
+        {
+          title: "Roommate conflict about bills",
+          solution: "Always have a 'House Agreement' before moving in. Use a tracking app (like Splitwise) and show receipts immediately upon payment."
+        }
+      ]
     },
     {
       id: "utilities",
