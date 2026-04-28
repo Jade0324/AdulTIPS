@@ -15,43 +15,55 @@ export default function Finance() {
       id: "savings",
       title: "Digital Savings Accounts",
       summary: "Modern banking with higher interest rates.",
-      explanation: "Digital banks offer 3% to 6% interest, compared to traditional banks' 0.0625%.",
+      timeLabel: "10 min setup",
+      effortLabel: "Immediate win",
+      costLabel: "₱100 to start",
+      explanation: "Digital banks (Maya, GoTyme, SeaBank) offer 3% to 6% interest, compared to traditional banks' 0.0625%. They are PDIC insured up to ₱500,000.",
       whatToDo: [
-        "Choose a digital bank (Maya, GoTyme, etc.).",
-        "Download the app and register.",
-        "Verify your identity with one valid ID.",
-        "Transfer your first deposit via Instapay."
+        "Choose a bank (Maya or GoTyme).",
+        "Download the app & register.",
+        "Verify with one valid ID.",
+        "Transfer ₱100 to test the account."
+      ],
+      commonMistakes: [
+        "Leaving all money in a 0.01% interest account",
+        "Ignoring PDIC insurance limits (₱500k)",
+        "Falling for 'Phishing' links via SMS"
       ],
       systemRule: "Let your money grow while you sleep.",
-      whyThisMatters: "Compounded daily interest beats inflation over time.",
+      whyThisMatters: "Traditional banks lose value to inflation. Digital banks help you break even.",
       requirements: ["Smartphone", "Valid ID", "Initial Deposit"],
-      proTip: "Maya and GoTyme are PDIC insured up to ₱500,000.",
-      doThisToday: "Download a digital banking app."
+      proTip: "Use GoTyme for free physical card at grocery kiosks, or Maya for high-yield savings goals.",
+      doThisToday: "Download Maya or GoTyme and verify your ID."
     },
     {
       id: "emergency",
       title: "The Emergency Fund (EF)",
       summary: "Your financial shock absorber for unexpected events.",
-      explanation: "An EF is money set aside specifically for job loss, medical emergencies, or repairs.",
+      timeLabel: "5 min prep",
+      effortLabel: "Ongoing mission",
+      costLabel: "Variable",
+      explanation: "An EF is specifically for job loss, medical emergencies, or urgent repairs. It's your 'Peace of Mind' fund.",
       whatToDo: [
-        "Calculate 3-6 months of your expenses.",
-        "Set a target amount for your EF.",
-        "Automate your savings every payday.",
-        "Keep it in a high-interest digital bank."
+        "Income <₱20k: Aim for ₱5k EF first.",
+        "Income ₱30k+: Aim for 3 months expenses.",
+        "Automate 10% of every payday.",
+        "Keep it separate from your spending."
+      ],
+      commonMistakes: [
+        "Using EF for '70% off' sales",
+        "Investing in stocks before building EF",
+        "Keeping EF in cash (unsafe and non-earning)"
       ],
       systemRule: "Save first, spend what's left.",
       whyThisMatters: "It prevents you from going into debt when life happens.",
-      requirements: ["Expense Tracker", "Savings Account", "Discipline"],
-      proTip: "An emergency is not a 70% off sale at the mall.",
-      doThisToday: "Calculate your 3-month expense total.",
+      requirements: ["Expense Tracker", "Digital Bank", "Discipline"],
+      proTip: "Progress beats perfection. Even ₱500/month is better than ₱0.",
+      doThisToday: "Calculate your current monthly expenses.",
       ifThisHappens: [
         {
-          title: "Lost my ATM card",
-          solution: "Immediately block the card via the bank app. Call the hotline to request a replacement and monitor for unauthorized charges."
-        },
-        {
-          title: "Need emergency money right now",
-          solution: "Access your EF. This is why you kept it in a digital bank—it's liquid and accessible 24/7. Do NOT use debt."
+          title: "Lost my job",
+          solution: "This is what the EF is for. Access it slowly while job hunting. Do not touch credit cards for food."
         }
       ]
     },

@@ -25,36 +25,52 @@ export default function Dashboard() {
       completedTasks: count,
       completionPercentage: Math.round((count / prev.totalKnownTasks) * 100)
     }));
+
+    // Generate personalized mission based on focus plan
+    const plan = JSON.parse(localStorage.getItem('userFocusPlan') || '{}');
+    if (plan.income === '0' || plan.income === '20k') {
+      setMission("Focus: Avoid debt traps & build ₱3k EF first.");
+    } else if (plan.income === '60k') {
+      setMission("Focus: Maximize 6-month EF & Health Protection.");
+    } else {
+      setMission("Focus: Complete foundation IDs & savings setup.");
+    }
   }, []);
+
+  const [mission, setMission] = useState("Focus: Complete foundation IDs & savings setup.");
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
       <header className="mb-16">
         <div className="flex items-center gap-3 text-primary font-bold mb-4">
           <LayoutDashboard size={20} />
-          <span className="uppercase tracking-[0.2em] text-xs">Progress Dashboard</span>
+          <span className="uppercase tracking-[0.2em] text-xs">Command Center</span>
         </div>
-        <h1 className="text-4xl md:text-6xl font-serif font-bold text-primary leading-tight">Mabuhay! Here's your <br className="hidden md:block" /> progress so far.</h1>
+        <h1 className="text-4xl md:text-6xl font-serif font-bold text-primary leading-tight">Mabuhay! Your journey <br className="hidden md:block" /> is in motion.</h1>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
         {/* Main Stats Card */}
-        <div className="lg:col-span-2 bg-primary text-white p-12 rounded-[3rem] relative overflow-hidden flex flex-col justify-between min-h-[400px] shadow-xl shadow-primary/20">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full -mr-32 -mt-32 blur-3xl" />
+        <div className="lg:col-span-2 bg-primary text-white p-12 rounded-[3.5rem] relative overflow-hidden flex flex-col justify-between min-h-[450px] shadow-2xl shadow-primary/20">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-accent/20 rounded-full -mr-32 -mt-32 blur-3xl opacity-50" />
           
           <div className="relative z-10">
-            <h2 className="text-6xl font-serif font-bold text-accent mb-2">{stats.completionPercentage}%</h2>
-            <p className="text-2xl font-serif font-bold opacity-80 italic">of the Adulting essentials mastered.</p>
+            <p className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4">Current Focus</p>
+            <h2 className="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">{mission}</h2>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-xs font-bold uppercase tracking-widest">
+              <Clock size={14} className="text-accent" />
+              <span>Step 1 of your roadmap</span>
+            </div>
           </div>
 
-          <div className="relative z-10 space-y-4">
+          <div className="relative z-10 space-y-6">
             <div className="flex justify-between text-sm font-bold uppercase tracking-widest opacity-60">
-              <span>Overall Progress</span>
-              <span>{stats.completedTasks} / {stats.totalKnownTasks} Tasks</span>
+              <span className="flex items-center gap-2 italic font-serif opacity-80 text-lg">Overall Mastery</span>
+              <span className="text-accent font-mono text-xl">{stats.completionPercentage}%</span>
             </div>
-            <div className="h-4 bg-white/10 rounded-full overflow-hidden">
+            <div className="h-6 bg-white/10 rounded-full overflow-hidden p-1">
               <div 
-                className="h-full bg-accent transition-all duration-1000" 
+                className="h-full bg-accent transition-all duration-1000 rounded-full shadow-[0_0_20px_rgba(255,184,0,0.4)]" 
                 style={{ width: `${stats.completionPercentage}%` }}
               />
             </div>

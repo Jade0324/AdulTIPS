@@ -124,80 +124,140 @@ export default function ModuleTemplate({
                   <h2 className="text-3xl font-serif font-bold text-primary">{topic.title}</h2>
                 </div>
 
-                <div className="space-y-8">
-                  <div>
-                    <p className="text-xs uppercase tracking-widest text-muted mb-2 font-bold">Quick Summary</p>
-                    <p className="text-xl text-body leading-relaxed font-light">{topic.summary}</p>
+                <div className="mb-8 p-4 bg-accent/5 border border-accent/20 rounded-xl flex items-center justify-between gap-4">
+                  <p className="text-sm font-medium text-primary">Is this relevant to you right now?</p>
+                  <div className="flex gap-2">
+                    <button className="px-3 py-1 bg-white border border-gray-100 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">Yes</button>
+                    <button className="px-3 py-1 bg-white border border-gray-100 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-gray-100 transition-all">Not yet</button>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {/* Meta Badges */}
+                  <div className="flex flex-wrap gap-4 mb-6">
+                    {topic.timeLabel && (
+                      <div className="flex items-center gap-2 px-3 py-1 bg-surface border border-gray-100 rounded-full text-[10px] font-bold uppercase tracking-widest text-muted">
+                        <Clock size={12} />
+                        {topic.timeLabel}
+                      </div>
+                    )}
+                    {topic.effortLabel && (
+                      <div className="flex items-center gap-2 px-3 py-1 bg-surface border border-gray-100 rounded-full text-[10px] font-bold uppercase tracking-widest text-muted">
+                        <CheckCircle2 size={12} />
+                        {topic.effortLabel}
+                      </div>
+                    )}
+                    {topic.costLabel && (
+                      <div className="flex items-center gap-2 px-3 py-1 bg-accent/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-accent">
+                        {topic.costLabel}
+                      </div>
+                    )}
                   </div>
 
-                  <div className="text-muted leading-relaxed text-lg border-l-2 border-accent/20 pl-6">
-                    {topic.explanation}
+                  {/* Section 1: What This Is */}
+                  <div className="p-8 bg-white border border-gray-100 rounded-[2rem] shadow-sm">
+                    <p className="text-xs uppercase tracking-widest text-muted mb-4 font-bold">1. What This Is</p>
+                    <p className="text-xl text-primary leading-relaxed font-serif italic mb-4">"{topic.summary}"</p>
+                    <p className="text-muted leading-relaxed">
+                      {topic.explanation}
+                    </p>
                   </div>
 
-                  <div className="bg-surface border border-gray-100 p-8 rounded-[1.5rem] shadow-sm">
-                    <h4 className="font-bold text-primary mb-4 uppercase tracking-widest text-xs">Steps to Take</h4>
-                    <ul className="space-y-3">
+                  {/* Section 2: What To Do Now */}
+                  <div className="p-8 bg-primary text-white rounded-[2rem] shadow-xl shadow-primary/10">
+                    <p className="text-xs uppercase tracking-widest text-accent mb-6 font-bold">2. What To Do Now</p>
+                    <ul className="space-y-4">
                       {topic.whatToDo.map((step, idx) => (
-                        <li key={idx} className="flex gap-3 items-start text-body">
-                          <CheckCircle2 size={18} className="text-primary/40 mt-1 flex-shrink-0" />
-                          <span className="text-lg">{step}</span>
+                        <li key={idx} className="flex gap-4 items-start">
+                          <div className="w-6 h-6 rounded-full bg-accent text-primary font-bold text-xs flex items-center justify-center shrink-0 mt-1">
+                            {idx + 1}
+                          </div>
+                          <span className="text-lg opacity-90 leading-snug">{step}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  {topic.ifThisHappens && (
-                    <div className="space-y-4">
-                      <p className="text-xs uppercase tracking-widest text-muted font-bold">Crisis Mode: If This Happens...</p>
-                      <div className="grid gap-4">
-                        {topic.ifThisHappens.map((block, idx) => (
-                          <div key={idx} className="p-6 bg-red-50 border border-red-100 rounded-2xl flex gap-4">
-                            <AlertCircle className="text-red-500 flex-shrink-0" />
-                            <div>
-                              <p className="font-bold text-red-900 mb-1">{block.title}</p>
-                              <p className="text-sm text-red-800 leading-relaxed">{block.solution}</p>
-                            </div>
-                          </div>
+                  {/* Section 3: Common Mistakes */}
+                  {topic.commonMistakes && (
+                    <div className="p-8 bg-red-50 border border-red-100 rounded-[2rem]">
+                      <p className="text-xs uppercase tracking-widest text-red-500 mb-6 font-bold flex items-center gap-2 text-primary font-bold mb-4 font-bold">
+                        <AlertCircle size={16} />
+                        3. Common Mistakes
+                      </p>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {topic.commonMistakes.map((mistake, idx) => (
+                          <li key={idx} className="flex gap-3 items-start text-red-900/80">
+                            <span className="text-red-400 font-bold">•</span>
+                            <span className="text-sm font-medium">{mistake}</span>
+                          </li>
                         ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Expandable Details (System Rule, etc) */}
+                  <details className="group border border-gray-100 rounded-2xl">
+                    <summary className="list-none flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 transition-colors">
+                      <span className="text-xs font-bold uppercase tracking-widest text-muted">Deeper Context (Optional)</span>
+                      <ChevronRight size={16} className="text-muted group-open:rotate-90 transition-transform" />
+                    </summary>
+                    <div className="p-6 pt-0 space-y-8">
+                      <div className="py-8 px-2 border-y border-gray-100">
+                        <p className="text-[10px] uppercase tracking-[0.3em] text-muted mb-4 font-bold">The System Rule</p>
+                        <p className="text-2xl font-serif font-bold text-primary leading-tight lowercase first-letter:uppercase">
+                          "{topic.systemRule}"
+                        </p>
                       </div>
+
+                      {topic.whyThisMatters && (
+                        <div className="p-6 bg-white border border-gray-100 rounded-2xl">
+                          <p className="text-xs uppercase tracking-widest text-muted mb-2 font-bold">The "Why"</p>
+                          <p className="text-body italic text-lg leading-relaxed">{topic.whyThisMatters}</p>
+                        </div>
+                      )}
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <Checklist 
+                          id={`${topic.id}-req`} 
+                          title="Detailed Requirements" 
+                          items={topic.requirements} 
+                        />
+                        <ProTip>
+                          {topic.proTip}
+                        </ProTip>
+                      </div>
+
+                      {topic.ifThisHappens && (
+                        <div className="space-y-4">
+                          <p className="text-xs uppercase tracking-widest text-muted font-bold">Crisis Mode: If This Happens...</p>
+                          <div className="grid gap-4">
+                            {topic.ifThisHappens.map((block, idx) => (
+                              <div key={idx} className="p-6 bg-red-50 border border-red-100 rounded-2xl flex gap-4">
+                                <AlertCircle className="text-red-500 flex-shrink-0" />
+                                <div>
+                                  <p className="font-bold text-red-900 mb-1">{block.title}</p>
+                                  <p className="text-sm text-red-800 leading-relaxed">{block.solution}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </details>
 
-                  <div className="py-8 px-2 border-y border-gray-100">
-                    <p className="text-[10px] uppercase tracking-[0.3em] text-muted mb-4 font-bold">The System Rule</p>
-                    <p className="text-3xl font-serif font-bold text-primary leading-tight">
-                      "{topic.systemRule}"
-                    </p>
-                  </div>
-
-                  {topic.whyThisMatters && (
-                    <div className="p-6 bg-white border border-gray-100 rounded-2xl">
-                      <p className="text-xs uppercase tracking-widest text-muted mb-2 font-bold">The "Why"</p>
-                      <p className="text-body italic text-lg leading-relaxed">{topic.whyThisMatters}</p>
-                    </div>
-                  )}
-
-                  <Checklist 
-                    id={`${topic.id}-req`} 
-                    title="Requirements / Checklist" 
-                    items={topic.requirements} 
-                  />
-
-                  <ProTip>
-                    {topic.proTip}
-                  </ProTip>
-
-                  <div className="p-8 bg-primary text-white rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg shadow-primary/20">
+                  <div className="p-8 bg-surface border border-gray-100 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-primary">
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                         <CheckCircle2 size={24} />
                       </div>
                       <div>
-                        <p className="text-xs uppercase tracking-widest opacity-60 font-bold mb-1">Your Mission</p>
+                        <p className="text-xs uppercase tracking-widest text-muted font-bold mb-1">Your Mission</p>
                         <p className="text-xl font-bold">Do This Today</p>
                       </div>
                     </div>
-                    <p className="text-lg font-medium text-accent bg-white/10 px-6 py-3 rounded-xl border border-white/10 text-center w-full md:w-auto">
+                    <p className="text-lg font-medium text-primary bg-white border border-gray-100 px-6 py-3 rounded-xl text-center w-full md:w-auto shadow-sm">
                       {topic.doThisToday}
                     </p>
                   </div>

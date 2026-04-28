@@ -16,67 +16,95 @@ export default function Roadmap() {
 
   const questions: Question[] = [
     {
-      id: 'employment',
-      question: "What is your current employment status?",
+      id: 'age',
+      question: "How old are you?",
+      options: [
+        { label: "18–22", value: "18-22" },
+        { label: "23–27", value: "23-27" },
+        { label: "28+", value: "28+" },
+      ]
+    },
+    {
+      id: 'status',
+      question: "What best describes you?",
       options: [
         { label: "Student", value: "student", icon: <Star /> },
-        { label: "Working (Full-time)", value: "working", icon: <Briefcase /> },
+        { label: "First jobber", value: "first-job", icon: <Briefcase /> },
         { label: "Freelancer", value: "freelancer", icon: <User /> },
+        { label: "Unemployed", value: "unemployed", icon: <Target /> },
         { label: "OFW", value: "ofw", icon: <Target /> },
+        { label: "Starting family", value: "family", icon: <Home /> },
+      ]
+    },
+    {
+      id: 'concern',
+      question: "What's your current biggest concern?",
+      options: [
+        { label: "Money", value: "money" },
+        { label: "IDs", value: "ids" },
+        { label: "Moving out", value: "moving" },
+        { label: "Career", value: "career" },
+        { label: "Stress", value: "stress" },
+        { label: "Relationships", value: "relationships" },
+      ]
+    },
+    {
+      id: 'income',
+      question: "Monthly income bracket?",
+      options: [
+        { label: "No income yet", value: "0" },
+        { label: "Under ₱20k", value: "20k" },
+        { label: "₱20k–₱40k", value: "40k" },
+        { label: "₱40k+", value: "60k" },
       ]
     },
     {
       id: 'living',
-      question: "Where are you currently staying?",
+      question: "Living setup?",
       options: [
-        { label: "With Parents", value: "parents", icon: <Home /> },
+        { label: "With parents", value: "parents", icon: <Home /> },
         { label: "Renting", value: "renting", icon: <Home /> },
-        { label: "Moving Out Soon", value: "moving", icon: <Home /> },
-      ]
-    },
-    {
-      id: 'priority',
-      question: "What is your main priority right now?",
-      options: [
-        { label: "Government IDs", value: "ids", icon: <CheckCircle2 /> },
-        { label: "Savings/EF", value: "finance", icon: <Wallet /> },
-        { label: "Health Protection", value: "health", icon: <User /> },
-        { label: "Investment/Property", value: "property", icon: <Home /> },
+        { label: "Planning to move out", value: "planning", icon: <Home /> },
       ]
     }
   ];
 
   const handleAnswer = (value: string) => {
-    setAnswers({ ...answers, [questions[step].id]: value });
+    const newAnswers = { ...answers, [questions[step].id]: value };
+    setAnswers(newAnswers);
     if (step < questions.length - 1) {
       setStep(step + 1);
     } else {
       setIsFinished(true);
+      // Save for dashboard
+      localStorage.setItem('userFocusPlan', JSON.stringify(newAnswers));
     }
   };
 
   const getRecommendations = () => {
     const recs = [];
     
-    // Logic for recommendations
-    if (answers.employment === 'student' || answers.priority === 'ids') {
-      recs.push({ title: "Get PhilSys + TIN first", desc: "Essential for any future bank account or job.", path: "/foundation#philsys" });
+    // Level 1: Survive
+    if (answers.income === '0' || answers.income === '20k' || answers.concern === 'ids') {
+      recs.push({ title: "Get TIN + PhilSys IDs", desc: "Highest priority. You cannot open a bank account or get a job without these.", path: "/foundation", level: "Level 1" });
     }
     
-    if (answers.employment === 'working' || answers.employment === 'freelancer') {
-      recs.push({ title: "Open high-interest savings", desc: "Move your salary from payroll to a digital bank.", path: "/finance#savings" });
-      recs.push({ title: "Build ₱10k mini-Emergency Fund", desc: "Start small but start now.", path: "/finance#emergency" });
+    // Income Reality Mode
+    if (answers.income === '0' || answers.income === '20k') {
+      recs.push({ title: "Build ₱5k Mini-Emergency Fund", desc: "Avoid debt traps by having a small safety net first.", path: "/finance", level: "Level 1" });
+    } else if (answers.income === '40k' || answers.income === '60k') {
+      recs.push({ title: "Build 3-month Emergency Fund", desc: "You have the capacity to secure your future. Aim for 3-6 months.", path: "/finance", level: "Level 2" });
     }
 
-    if (answers.living === 'moving') {
-      recs.push({ title: "Learn Renter Rights (RA 9653)", desc: "Know your 1-month advance/deposit rules.", path: "/living#renting" });
+    if (answers.living === 'planning') {
+      recs.push({ title: "Learn Renter Rights (RA 9653)", desc: "Know the rules before signing a lease.", path: "/living", level: "Level 2" });
     }
 
-    if (answers.priority === 'health') {
-      recs.push({ title: "PhilHealth + HMO Check", desc: "Verify your employer coverage.", path: "/health#philhealth" });
+    if (answers.concern === 'stress') {
+      recs.push({ title: "Protect Your Mind", desc: "Start a journaling practice to handle adulting stress.", path: "/growth", level: "Level 2" });
     }
 
-    recs.push({ title: "Set up 2FA everywhere", desc: "Immediate protection for all your new digital accounts.", path: "/protection" });
+    recs.push({ title: "Immediate: 2FA & Privacy", desc: "Set up security for all accounts today.", path: "/protection", level: "Level 1" });
 
     return recs;
   };
@@ -120,7 +148,10 @@ export default function Roadmap() {
                 className="group flex flex-col md:flex-row md:items-center justify-between p-8 bg-white border border-gray-100 rounded-[2rem] hover:border-primary transition-all shadow-sm"
               >
                 <div className="flex gap-6 items-center">
-                  <div className="text-3xl font-serif font-bold text-accent opacity-40">{idx + 1}</div>
+                  <div className="flex flex-col items-center gap-1">
+                    <div className="text-3xl font-serif font-bold text-accent opacity-40">{idx + 1}</div>
+                    <span className="text-[8px] font-bold uppercase tracking-widest text-muted">{rec.level}</span>
+                  </div>
                   <div>
                     <h3 className="text-2xl font-serif font-bold text-primary mb-1">{rec.title}</h3>
                     <p className="text-muted leading-relaxed">{rec.desc}</p>

@@ -15,17 +15,25 @@ export default function Foundation() {
       id: "philsys",
       title: "Philippine National ID",
       summary: "The central identification platform for all Filipino citizens.",
-      explanation: "PhilSys aims to simplify public and private transactions by providing a single, valid proof of identity.",
+      timeLabel: "5 min read",
+      effortLabel: "2 month wait",
+      costLabel: "₱0 (Free)",
+      explanation: "PhilSys aims to simplify public and private transactions by providing a single, valid proof of identity. It's legally mandated to be accepted by all agencies and banks.",
       whatToDo: [
         "Register online at the PhilSys website.",
-        "Book an appointment for biometrics capture.",
-        "Visit the registration center with supporting docs.",
-        "Wait for your physical card or download ePhilID."
+        "Book biometrics capture appointment.",
+        "Visit the center with PSA Birth Cert.",
+        "Download ePhilID while waiting for the card."
+      ],
+      commonMistakes: [
+        "Waiting for the physical card to use it (ePhilID is valid)",
+        "Missing the appointment slot",
+        "Wrong spelling on PSA cert (fix PSA first)"
       ],
       systemRule: "One ID to rule them all.",
-      whyThisMatters: "It is legally mandated to be accepted by all agencies and banks.",
+      whyThisMatters: "Without this, opening bank accounts or getting a passport is 10x harder.",
       requirements: ["PSA Birth Certificate", "Supporting ID", "Appointment Slip"],
-      proTip: "Download the ePhilID if the physical card is delayed.",
+      proTip: "If you need an ID immediately, the ePhilID (printed version) is just as valid as the plastic card.",
       doThisToday: "Check the PhilSys website for registration status."
     },
     {
@@ -81,20 +89,28 @@ export default function Foundation() {
     },
     {
       id: "tin",
-      title: "TIN & BIR Basics",
+      title: "TIN (Tax Identification Number)",
       summary: "Your unique identifier for all tax-related transactions.",
-      explanation: "Every working Filipino needs a TIN to comply with tax laws and employment requirements.",
+      timeLabel: "3 min read",
+      effortLabel: "1 day setup",
+      costLabel: "₱0 (Free)",
+      explanation: "Every working Filipino needs a TIN. It's required for employment, investments, and even some high-value purchases.",
       whatToDo: [
-        "Apply via your employer or the ORUS portal.",
-        "Submit BIR Form 1902 or 1904.",
-        "Verify your TIN via the BIR website.",
-        "Keep your TIN card in a safe place."
+        "Apply via the ORUS BIR portal.",
+        "Submit BIR Form 1902 (for employees).",
+        "Get your TIN verification slip.",
+        "Request the digital TIN ID."
       ],
-      systemRule: "Taxes are the price of civilization.",
-      whyThisMatters: "It is required for employment and opening bank accounts.",
+      commonMistakes: [
+        "Applying for a second TIN (Illegal!)",
+        "Paying 'fixers' on Facebook (It's free)",
+        "Forgetting the number (Save it in a vault)"
+      ],
+      systemRule: "You only get one TIN for life.",
+      whyThisMatters: "Employers cannot pay you without this number.",
       requirements: ["Birth Certificate", "Valid ID", "Employment Contract"],
-      proTip: "You only ever need ONE TIN for life. Do not re-apply.",
-      doThisToday: "Ask your HR if they have processed your TIN."
+      proTip: "BIR now has a mobile app and web portal (ORUS) so you don't always have to visit the RDO.",
+      doThisToday: "Ask your HR for your TIN or check if you already have one."
     }
   ];
 

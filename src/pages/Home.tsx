@@ -1,202 +1,179 @@
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { 
-  IdCard, 
-  Wallet, 
-  Home as HomeIcon, 
-  HeartPulse, 
-  Key, 
-  BookOpen,
-  ArrowRight,
-  TrendingUp,
-  Target,
-  CheckCircle2,
+  ArrowRight, 
+  Search, 
+  Heart,
+  Shield,
   Zap,
-  ShieldAlert
+  Briefcase,
+  Home as HomeIcon,
+  Wallet,
+  Compass
 } from 'lucide-react';
-import ModuleCard from '@/components/ModuleCard';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
-  const modules = [
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const personas = [
     {
-      title: "Foundation",
-      description: "Step-by-step guide to PhilSys ID, Passport, Driver's License, SSS, PhilHealth, Pag-IBIG, and TIN.",
-      icon: IdCard,
-      path: "/foundation",
-      moduleNumber: "01"
+      name: "Carla, 22",
+      role: "Fresh Graduate",
+      needs: ["First Job", "Valid IDs", "Savings Basics"],
+      path: "/roadmap?persona=graduate",
+      color: "bg-blue-50 text-blue-700"
     },
     {
-      title: "Finance",
-      description: "Master digital savings, emergency funds, credit scores, and credit cards without the debt trap.",
-      icon: Wallet,
-      path: "/finance",
-      moduleNumber: "02"
+      name: "Mark, 26",
+      role: "Renting in QC",
+      needs: ["Rent Budgeting", "Insurance", "Side Income"],
+      path: "/roadmap?persona=renter",
+      color: "bg-orange-50 text-orange-700"
     },
     {
-      title: "Property",
-      description: "Navigating real estate (Pre-selling vs RFO), housing loans, and the hidden costs of vehicles.",
-      icon: HomeIcon,
-      path: "/property",
-      moduleNumber: "03"
-    },
-    {
-      title: "Health",
-      description: "Understanding HMOs, PhilHealth, and the difference between Term, VUL, and Traditional Insurance.",
-      icon: HeartPulse,
-      path: "/health",
-      moduleNumber: "04"
-    },
-    {
-      title: "Living",
-      description: "Your rights as a tenant, Rent Control Act, utility setup, and legal documents like SPA.",
-      icon: Key,
-      path: "/living",
-      moduleNumber: "05"
-    },
-    {
-      title: "Protection",
-      description: "Identifying digital scams, GCash hacks, and illegal lending traps in the Philippines.",
-      icon: ShieldAlert,
-      path: "/protection",
-      moduleNumber: "06"
-    },
-    {
-      title: "Growth",
-      description: "Mindset and life optimization. 10-year vision, comfort zones, and building relationships.",
-      icon: TrendingUp,
-      path: "/growth",
-      moduleNumber: "07"
-    },
-    {
-      title: "Resources",
-      description: "A quick reference for acronyms, printable checklists, and a glossary of adulting terms.",
-      icon: BookOpen,
-      path: "/resources",
-      moduleNumber: "Extra"
+      name: "Jen, 30",
+      role: "Starting a Family",
+      needs: ["Property", "Critical Illness", "Long-term Planning"],
+      path: "/roadmap?persona=family",
+      color: "bg-purple-50 text-purple-700"
     }
   ];
 
+  const situations = [
+    { title: "I need money guidance", icon: <Wallet />, path: "/finance", color: "bg-green-50" },
+    { title: "I’m planning to move out", icon: <HomeIcon />, path: "/living", color: "bg-orange-50" },
+    { title: "I need valid IDs", icon: <Shield />, path: "/foundation", color: "bg-blue-50" },
+    { title: "I feel behind in life", icon: <Compass />, path: "/roadmap", color: "bg-purple-50" },
+    { title: "I need career direction", icon: <Briefcase />, path: "/growth", color: "bg-yellow-50" },
+    { title: "I need to organize adulthood", icon: <Zap />, path: "/dashboard", color: "bg-red-50" },
+  ];
+
   return (
-    <div className="space-y-32">
+    <div className="relative pb-20">
       {/* Hero Section */}
-      <section className="relative pt-24 pb-40 overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-primary/5 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="pt-24 pb-20 overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45%_40%_at_50%_50%,rgba(6,22,46,0.05)_0%,transparent_100%)]" />
+        
+        <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent font-bold text-[10px] uppercase tracking-[0.3em] mb-10">
-            The First Adulting Operating System
+            Survival Guide for Filipinos
           </div>
-          <h1 className="text-6xl md:text-8xl font-serif font-bold text-primary mb-8 leading-tight">
-            Adulting with <br className="hidden md:block" /> <span className="text-accent italic">Confidence.</span>
+          
+          <h1 className="text-6xl md:text-8xl font-serif font-bold text-primary mb-8 leading-tight tracking-tight">
+            Adulting is learned, <br className="hidden md:block" /> 
+            not <span className="text-accent italic">inherited.</span>
           </h1>
-          <p className="text-muted text-xl md:text-2xl max-w-2xl mx-auto mb-12 leading-relaxed">
-            A high-performance guide system for Filipinos navigating government IDs, 
-            finance, property, and mental expansion.
+          
+          <p className="text-muted text-xl md:text-2xl max-w-2xl mx-auto mb-12 leading-relaxed opacity-80">
+            You don't need to do everything now. Most people learn this late. 
+            Start with one small win today.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link
-              to="/roadmap"
-              className="w-full sm:w-auto bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-xl shadow-primary/20"
-            >
-              Get Your Personalized Roadmap
-              <ArrowRight size={20} />
-            </Link>
-            <Link
-              to="/foundation"
-              className="w-full sm:w-auto bg-white border border-gray-200 text-primary px-10 py-5 rounded-full font-bold text-lg hover:border-primary transition-all flex items-center justify-center gap-2"
-            >
-              Explore Modules
-            </Link>
-          </div>
-        </div>
-      </section>
 
-      {/* How It Works */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-white rounded-[3rem] border border-gray-100">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl font-serif font-bold mb-4 text-primary">How It Works</h2>
-          <p className="text-muted text-lg">Three simple steps to master adulting.</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {[
-            { step: "01", title: "Pick a module", desc: "Choose from 6 essential life categories.", icon: Target },
-            { step: "02", title: "Follow steps", desc: "Follow our strict, actionable guides.", icon: Zap },
-            { step: "03", title: "Take action", desc: "Complete the 'Do This Today' tasks.", icon: CheckCircle2 },
-          ].map((item) => (
-            <div key={item.step} className="text-center group">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-primary/5 text-primary mb-8 group-hover:bg-accent group-hover:text-white transition-all">
-                <item.icon size={32} />
-              </div>
-              <h3 className="text-2xl font-serif font-bold mb-4">{item.title}</h3>
-              <p className="text-muted leading-relaxed">{item.desc}</p>
+          {/* Smart Search Bar */}
+          <div className="max-w-2xl mx-auto mb-16 relative">
+            <div className="absolute inset-y-0 left-6 flex items-center text-muted pointer-events-none">
+              <Search size={24} />
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Modules Grid */}
-      <section id="modules" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">The Survival Modules</h2>
-          <p className="text-muted text-lg max-w-xl mx-auto">
-            Broken down into actionable guides. Start from the beginning or jump to what you need right now.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {modules.map((module) => (
-            <ModuleCard 
-              key={module.title} 
-              title={module.title}
-              description={module.description}
-              icon={module.icon}
-              path={module.path}
-              moduleNumber={module.moduleNumber}
+            <input 
+              type="text" 
+              placeholder="What are you dealing with? (e.g. 'Need passport', 'Broke after payday')"
+              className="w-full pl-16 pr-8 py-6 rounded-full bg-white border border-gray-100 shadow-2xl shadow-primary/5 text-lg focus:ring-2 focus:ring-primary outline-none transition-all"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
-          ))}
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-4 text-sm font-bold text-muted uppercase tracking-widest">
+            <span className="flex items-center gap-2"><Heart size={14} className="text-red-400" /> You are not behind</span>
+            <span className="mx-2 opacity-20">|</span>
+            <span className="flex items-center gap-2"><Zap size={14} className="text-yellow-400" /> Actionable steps</span>
+            <span className="mx-2 opacity-20">|</span>
+            <span className="flex items-center gap-2"><Shield size={14} className="text-blue-400" /> 100% Filipino context</span>
+          </div>
         </div>
       </section>
 
-      {/* Progress Visual (Decorative) */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="bg-surface border border-gray-100 p-10 rounded-[2.5rem] shadow-sm">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-2xl font-serif font-bold text-primary">Your Adulting Progress</h3>
-            <span className="text-sm font-bold text-accent uppercase tracking-widest">Decorative Only</span>
-          </div>
-          <div className="space-y-8">
-            {[
-              { label: "Foundation", progress: 100 },
-              { label: "Finance", progress: 65 },
-              { label: "Property", progress: 20 },
-            ].map((item) => (
-              <div key={item.label}>
-                <div className="flex justify-between text-sm font-bold mb-2">
-                  <span className="text-primary">{item.label}</span>
-                  <span className="text-muted">{item.progress}%</span>
+      {/* Situational Grid */}
+      <section className="py-20 bg-surface border-y border-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl font-serif font-bold text-primary mb-12 text-center">What do you need help with today?</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {situations.map((sit, idx) => (
+              <Link 
+                key={idx}
+                to={sit.path}
+                className={`group p-8 rounded-[2.5rem] border border-gray-100 ${sit.color} hover:bg-white hover:shadow-xl hover:shadow-primary/5 transition-all flex items-center justify-between`}
+              >
+                <div className="flex items-center gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    {sit.icon}
+                  </div>
+                  <span className="text-xl font-serif font-bold text-primary">{sit.title}</span>
                 </div>
-                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-primary transition-all duration-1000" 
-                    style={{ width: `${item.progress}%` }}
-                  />
-                </div>
-              </div>
+                <ArrowRight className="text-primary/20 group-hover:text-primary transition-colors" />
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="bg-primary rounded-[3rem] p-12 md:p-20 text-center text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full -mr-48 -mt-48 blur-3xl" />
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8 relative z-10 leading-tight">Ready to start <br /> your journey?</h2>
-          <p className="text-white/80 text-xl mb-12 max-w-xl mx-auto relative z-10 leading-relaxed">
-            Join thousands of young Filipinos who are navigating adult life with confidence and clarity.
+      {/* Persona Section */}
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-serif font-bold text-primary mb-4">Or pick a situation like yours</h2>
+            <p className="text-muted text-lg">Click a persona to see a custom roadmap for their life stage.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {personas.map((persona, idx) => (
+              <Link 
+                key={idx}
+                to={persona.path}
+                className={`flex flex-col h-full p-10 rounded-[3rem] border border-gray-100 transition-all hover:translate-y-[-8px] hover:shadow-2xl ${persona.color}`}
+              >
+                <div className="mb-8">
+                  <h3 className="text-3xl font-serif font-bold mb-2">{persona.name}</h3>
+                  <p className="uppercase tracking-widest text-[10px] font-bold opacity-70">{persona.role}</p>
+                </div>
+                
+                <div className="flex-grow space-y-4 mb-10">
+                  <p className="text-xs font-bold uppercase tracking-widest opacity-40">Needs First:</p>
+                  {persona.needs.map((need, i) => (
+                    <div key={i} className="flex items-center gap-3 font-medium">
+                      <div className="w-1.5 h-1.5 rounded-full bg-current opacity-30" />
+                      {need}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-auto flex items-center justify-between font-bold">
+                  <span>View Roadmap</span>
+                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
+                    <ArrowRight size={20} />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Encouragement Banner */}
+      <section className="pb-32 px-4">
+        <div className="max-w-4xl mx-auto p-12 rounded-[3.5rem] bg-primary text-white text-center relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(255,184,0,0.2),transparent_70%)]" />
+          <h2 className="text-4xl font-serif font-bold mb-6 relative z-10">Ready to start?</h2>
+          <p className="text-xl opacity-70 mb-10 max-w-xl mx-auto relative z-10 font-serif italic">
+            "The best time to start was yesterday. The second best time is right now. We'll handle the boring details together."
           </p>
-          <Link
-            to="/foundation"
-            className="inline-block bg-accent text-primary px-12 py-5 rounded-full font-bold text-lg hover:bg-accent/90 transition-all relative z-10"
+          <Link 
+            to="/roadmap"
+            className="inline-flex items-center gap-3 bg-accent text-primary px-10 py-5 rounded-full font-bold text-lg hover:bg-white transition-all relative z-10 shadow-xl shadow-accent/20"
           >
-            Start with Foundation
+            Get Your 5-Step Focus Plan
+            <ArrowRight />
           </Link>
         </div>
       </section>
